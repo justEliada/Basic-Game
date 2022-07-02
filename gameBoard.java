@@ -22,11 +22,10 @@ public class gameBoard extends JPanel implements Runnable{
     tileManager tiles = new tileManager(this);
     KeyHandler keyH = new KeyHandler();
     public Collision checker = new Collision(this);
-     //********************************************************** public AssetSetter aSetter = new AssetSetter(this);
+
     Thread gameThread;
     player player = new player(this, keyH);
-     //********************************************************** public superObject obj[]= new superObject[10]; // can display up to 1 object at the same time
-
+    
     
     public gameBoard(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -37,12 +36,7 @@ public class gameBoard extends JPanel implements Runnable{
 
     }
 
-     //********************************************************** public void setUpGame(){
-
-       //**********************************************************   aSetter.setObject();
-      //********************************************************** }
-
-
+   
     
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -75,13 +69,13 @@ public class gameBoard extends JPanel implements Runnable{
             if(delta >= 1){
         
                     update();// update info such as charachter positions
-                    repaint();// draw the screen with updated info-> calls paint component method
+                    repaint();
                     delta--;
                     drawCount++;
             }
 
            if(timer >= 1000000000){
-               System.out.println("FPS" + drawCount); // just prints out the movement speed FPS
+               System.out.println("FPS" + drawCount); 
                drawCount = 0;
                timer = 0;
            }
@@ -99,15 +93,11 @@ public class gameBoard extends JPanel implements Runnable{
    public void paintComponent(Graphics g){
        super.paintComponent(g);
 
-       Graphics2D g2 = (Graphics2D)g; //convert graphics class to 2d graphics class -> better usage + layering
+       Graphics2D g2 = (Graphics2D)g;
 
        tiles.draw(g2); 
       
-        //**********************************************************for(int i=0; i<obj.length; i++){
-          //**********************************************************  if(obj[i] != null){ // check to see if the slot is empt, avoid NullPointer
-            //**********************************************************    obj[i].draw(g2, this);
-          //**********************************************************  }
-       //********************************************************** } 
+       
 
        player.draw(g2);
 
